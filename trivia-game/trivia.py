@@ -1,7 +1,7 @@
 class QuestionAnswer:
-    def __init__(self, question, choice_list, correct_answer):
+    def __init__(self, question, possible_answer_list, correct_answer):
         self._question = question
-        self._choice_list = choice_list
+        self._possible_answer_list = possible_answer_list
         self._correct_answer = correct_answer
 
 
@@ -34,9 +34,9 @@ class Trivia:
         return question_answer_list
 
 
-def is_user_answer_valid(choice_list, user_answer):
-    for choice_num in range(len(choice_list)):
-        if user_answer == choice_list[choice_num]:
+def is_user_answer_valid(possible_answer_list, user_answer):
+    for i in range(len(possible_answer_list)):
+        if user_answer == possible_answer_list[i]:
             return True
 
     return False
@@ -46,33 +46,33 @@ def main():
     player_1_score = 0
     player_2_score = 0
     trivia = Trivia()
-    qaList = trivia.create_question_answer()
+    question_answer_list = trivia.create_question_answer()
 
-    for i in range(len(qaList)):
+    for i in range(len(question_answer_list)):
         if i % 2 == 0:
             print('\n## Player 1 turn ##', end='\n\n')
         else:
             print('\n## Player 2 turn ##', end='\n\n')
 
         # Display question to console
-        print(qaList[i]._question)
+        print(question_answer_list[i]._question)
 
-        # Display all choice to console
-        print(*qaList[i]._choice_list, sep='\n', end='\n\n')
+        # Display all possible answers to console
+        print(*question_answer_list[i]._possible_answer_list, sep='\n', end='\n\n')
 
         # Store player answer
         player_answer = input('Enter your answer: ')
 
-        # Validate user input, display question and choice again while player's answer not valid
-        while not is_user_answer_valid(qaList[i]._choice_list, player_answer):
-            print('Your answer does not match available choice! try again.\n')
-            print(qaList[i]._question)
-            print(*qaList[i]._choice_list, sep='\n', end='\n\n')
+        # Validate user input, display question and possible answers while player's input is not valid
+        while not is_user_answer_valid(question_answer_list[i]._possible_answer_list, player_answer):
+            print('Your answer does not match available possible_answer! try again.\n')
+            print(question_answer_list[i]._question)
+            print(*question_answer_list[i]._possible_answer_list, sep='\n', end='\n\n')
             player_answer = input('Enter your answer: ')
 
         # Check if player's answer is correct and increment if it is
-        if player_answer != qaList[i]._correct_answer:
-            print('Incorrect! The correct answer is ', qaList[i]._correct_answer)
+        if player_answer != question_answer_list[i]._correct_answer:
+            print('Incorrect! The correct answer is ', question_answer_list[i]._correct_answer)
         else:
             print('Correct!')
             if i % 2 == 0:
