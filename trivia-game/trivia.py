@@ -50,30 +50,25 @@ def main():
 
     for i in range(len(qaList)):
         if i % 2 == 0:
-            print('\n## Player 1 turn ##')
+            print('\n## Player 1 turn ##', end='\n\n')
         else:
-            print('\n## Player 2 turn ##')
+            print('\n## Player 2 turn ##', end='\n\n')
 
-        print()
         # Display question to console
         print(qaList[i]._question)
 
         # Display all choice to console
-        for choice_num in range(len(qaList[i]._choice_list)):
-            print(qaList[i]._choice_list[choice_num])
+        print(*qaList[i]._choice_list, sep='\n', end='\n\n')
 
         # Store player answer
-        player_answer = input('\nEnter your answer: ')
+        player_answer = input('Enter your answer: ')
 
-        # Validate user input
+        # Validate user input, display question and choice again while player's answer not valid
         while not is_user_answer_valid(qaList[i]._choice_list, player_answer):
             print('Your answer does not match available choice! try again.\n')
             print(qaList[i]._question)
-
-            for choice_num in range(len(qaList[i]._choice_list)):
-                print(qaList[i]._choice_list[choice_num])
-
-            player_answer = input('\nEnter your answer: ')
+            print(*qaList[i]._choice_list, sep='\n', end='\n\n')
+            player_answer = input('Enter your answer: ')
 
         # Check if player's answer is correct and increment if it is
         if player_answer != qaList[i]._correct_answer:
