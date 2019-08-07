@@ -15,23 +15,31 @@ class Trivia:
         self._correct_answer = 'yes'
 
     def create_question_answer(self):
-        question_answer_list = [
-            QuestionAnswer('What is a noun?', 
-                ['person', 'place', 'thing', 'all the above'], 
+        self.__question_answer_list = [
+            QuestionAnswer(
+                'What is a noun?',
+                ['person', 'place', 'thing', 'all the above'],
                 'all the above'
             ),
-            QuestionAnswer('What are the three states of matter?', 
-                ['1, 2, 3', 'solid, liquid, gas', 'water, ice, air', 'none'], 
+            QuestionAnswer(
+                'What are the three states of matter?',
+                ['1, 2, 3', 'solid, liquid, gas', 'water, ice, air', 'none'],
                 'solid, liquid, gas'
             ),
-            QuestionAnswer('What is an ostrich?', 
-                ['place', 'stream', 'bird', 'ostrich not real'], 
+            QuestionAnswer(
+                'What is an ostrich?',
+                ['place', 'stream', 'bird', 'ostrich not real'],
                 'bird'
             ),
-            QuestionAnswer('Which is a not framework?', ['Flutter', 'Flux', 'Rocket', 'Laravel'], 'Flux'),
+            QuestionAnswer(
+                'Which is a not framework?',
+                ['Flutter', 'Flux', 'Rocket', 'Laravel'],
+                'Flux'
+            ),
         ]
 
-        return question_answer_list
+    def get_question_answer_list(self):
+        return self.__question_answer_list
 
 
 def is_user_answer_valid(possible_answer_list, user_answer):
@@ -46,7 +54,8 @@ def main():
     player_1_score = 0
     player_2_score = 0
     trivia = Trivia()
-    question_answer_list = trivia.create_question_answer()
+    trivia.create_question_answer()
+    question_answer_list = trivia.get_question_answer_list()
 
     for i in range(len(question_answer_list)):
         if i % 2 == 0:
@@ -63,8 +72,12 @@ def main():
         # Store player answer
         player_answer = input('Enter your answer: ')
 
-        # Validate user input, display question and possible answers while player's input is not valid
-        while not is_user_answer_valid(question_answer_list[i]._possible_answer_list, player_answer):
+        # Validate user input,
+        # while player's input is not valid
+        # display question and possible answers
+        while not is_user_answer_valid(
+                question_answer_list[i]._possible_answer_list,
+                player_answer):
             print('Your answer does not match available possible_answer! try again.\n')
             print(question_answer_list[i]._question)
             print(*question_answer_list[i]._possible_answer_list, sep='\n', end='\n\n')
