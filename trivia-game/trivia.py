@@ -1,3 +1,16 @@
+class Player:
+    def __init__(self):
+        self.__score = 0
+
+    @property
+    def score(self):
+        return self.__score
+
+    @score.setter
+    def score(self, score):
+        self.__score = score
+
+
 class QuestionAnswer:
     def __init__(self, question, possible_answer_list, correct_answer):
         self._question = question
@@ -51,8 +64,8 @@ def is_user_answer_valid(possible_answer_list, user_answer):
 
 
 def main():
-    player_1_score = 0
-    player_2_score = 0
+    player_one = Player()
+    player_two = Player()
     trivia = Trivia()
     trivia.create_question_answer()
     question_answer_list = trivia.get_question_answer_list()
@@ -89,17 +102,17 @@ def main():
         else:
             print('Correct!')
             if i % 2 == 0:
-                player_1_score += 1
+                player_one.score += 1
             else:
-                player_2_score += 1
+                player_two.score += 1
 
     print('\n## Game Over ##')
-    print('Player 1 score: ', player_1_score)
-    print('Player 2 score: ', player_2_score)
+    print('Player 1 score: ', player_one.score)
+    print('Player 2 score: ', player_two.score)
 
-    if player_1_score > player_2_score:
+    if player_one.score > player_two.score:
         print('Player 1 Win')
-    elif player_1_score < player_2_score:
+    elif player_one.score < player_two.score:
         print('Player 2 Win')
     else:
         print("This game end in a draw")
