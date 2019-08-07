@@ -63,13 +63,20 @@ def is_user_answer_valid(possible_answer_list, user_answer):
     return False
 
 
-def main():
-    player_one = Player()
-    player_two = Player()
-    trivia = Trivia()
-    trivia.create_question_answer()
-    question_answer_list = trivia.get_question_answer_list()
+def print_game_result(player_one, player_two):
+    print('\n## Game Over ##')
+    print('Player 1 score: ', player_one.score)
+    print('Player 2 score: ', player_two.score)
 
+    if player_one.score > player_two.score:
+        print('Player 1 Win')
+    elif player_one.score < player_two.score:
+        print('Player 2 Win')
+    else:
+        print("This game end in a draw")
+
+
+def run_game(question_answer_list, player_one, player_two):
     for i in range(len(question_answer_list)):
         if i % 2 == 0:
             print('\n## Player 1 turn ##', end='\n\n')
@@ -106,16 +113,16 @@ def main():
             else:
                 player_two.score += 1
 
-    print('\n## Game Over ##')
-    print('Player 1 score: ', player_one.score)
-    print('Player 2 score: ', player_two.score)
 
-    if player_one.score > player_two.score:
-        print('Player 1 Win')
-    elif player_one.score < player_two.score:
-        print('Player 2 Win')
-    else:
-        print("This game end in a draw")
+def main():
+    player_one = Player()
+    player_two = Player()
+    trivia = Trivia()
+    trivia.create_question_answer()
+    question_answer_list = trivia.get_question_answer_list()
+
+    run_game(question_answer_list, player_one, player_two)
+    print_game_result(player_one, player_two)
 
 
 main()
